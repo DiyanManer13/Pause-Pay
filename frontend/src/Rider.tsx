@@ -4,7 +4,6 @@ import {
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties } from "react";
-import { SNSClient, PublishCommand } from "@aws-sdk/client-sns";
 import type { RiderLanguage } from "./i18n";
 import { riderText } from "./i18n";
 import type { IScannerControls } from "@zxing/browser";
@@ -213,26 +212,13 @@ export const Rider = ({
   const scannerControlsRef = useRef<IScannerControls | null>(null);
   const scanCompletedRef = useRef(false);
 
-  // AWS SNS Emergency Trigger
+  // The backend owns AWS credentials; the rider app only requests an emergency alert.
   const fireEmergencyEmail = async () => {
     setIsSendingSos(true);
     showToast("Triggering AWS Emergency Protocol...");
     try {
-      const snsClient = new SNSClient({
-        region: import.meta.env.VITE_AWS_REGION,
-        credentials: {
-          accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
-          secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
-        }
-      });
-      
-      const command = new PublishCommand({
-        TopicArn: "arn:aws:sns:ap-south-1:629234874999:HeatBudgetAlerts",
-        Subject: "🚨 SOS: Rider Emergency Triggered",
-        Message: `CRITICAL ALERT:\n\nRider ${riderId} has manually triggered the SOS Emergency button from their HeatBudget app.\n\nImmediate medical or safety support required. Please dispatch fleet support to their current GPS location immediately.\n\n- AWS Location Service & HeatBudget App`,
-      });
-      
-      await snsClient.send(command);
+      const response = await fetch(`/api/v1/alerts/emergency/${encodeURIComponent(riderId)}`, { method: "POST" });
+      if (!response.ok) throw new Error("Emergency alert delivery failed");
       showToast("Emergency alert sent to Fleet Manager!");
     } catch (error) {
       console.error("Failed to send AWS SNS SOS:", error);

@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
-import { Activity, Bike, FileText, Flame, Map } from "lucide-react";
-import { Rider } from "./Rider";
-import { DispatchMap } from "./DispatchMap";
-import { LiveComparison } from "./LiveComparison";
-import { Reports } from "./Reports";
+import { lazy, Suspense, useEffect, useState } from "react";
+import { Activity, Bike, Flame, Map } from "lucide-react";
 import type { Language, RiderLanguage } from "./i18n";
 import type { DispatchMapData } from "./types";
 import "./styles.css";
 import "./DispatchMap.css";
 
-type Page = "rider" | "map" | "compare" | "reports";
+const Rider = lazy(() => import("./Rider").then(({ Rider }) => ({ default: Rider })));
+const DispatchMap = lazy(() => import("./DispatchMap").then(({ DispatchMap }) => ({ default: DispatchMap })));
+const LiveComparison = lazy(() => import("./LiveComparison").then(({ LiveComparison }) => ({ default: LiveComparison })));
+
+type Page = "rider" | "map" | "compare";
 type MapView = "compare" | "BASELINE" | "HEAT_AWARE";
 
 const pages: { id: Page; label: string; Icon: typeof Bike }[] = [
   { id: "rider", label: "Rider", Icon: Bike },
   { id: "map", label: "Heatmap", Icon: Map },
   { id: "compare", label: "Live comparison", Icon: Activity },
-  { id: "reports", label: "Reports", Icon: FileText },
 ];
 
 const readPage = (): Page => {
@@ -113,6 +112,7 @@ export const App = () => {
         ))}
       </nav>
 
+      <Suspense fallback={<div className="empty-state" role="status">Loading application…</div>}>
       {page === "rider" && (
         <div className="rider-view">
           <Rider riderId={selectedRiderId} language={riderLanguage} setLanguage={setRiderLanguage} />
@@ -188,7 +188,7 @@ export const App = () => {
       {page === "compare" && (
         <LiveComparison />
       )}
-      {page === "reports" && <Reports />}
+      </Suspense>
     </main>
   );
 };

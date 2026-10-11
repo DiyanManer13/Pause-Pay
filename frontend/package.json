@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@aws-sdk/client-sns": "^3.1149.0",
     "@zxing/browser": "^0.1.5",
     "leaflet": "latest",
     "lucide-react": "latest",

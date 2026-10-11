@@ -144,6 +144,8 @@
 
 .error { display:flex; align-items:center; gap:8px; margin-bottom:14px; padding:12px 14px; color:#8e3e2c; background:#fff0ec; border-radius:10px; font-size:14px; }
 .map-loading { display:grid; place-content:center; min-height:300px; color:#5f786e; font-size:15px; }
+.aws-map-fallback { display:grid; height:100%; place-content:center; gap:8px; padding:24px; color:#654b13; background:#fff8e6; text-align:center; }.aws-map-fallback span { max-width:280px; color:#7c6a40; font-size:12px; line-height:1.5; }.aws-map-fallback code { padding:1px 4px; background:#fff; border-radius:3px; }
+.osm-map-wrap { position:relative; }.comparison-status { display:block; margin-top:10px; color:#7c5a1d; font-size:15px; line-height:1.35; }.comparison-status.resting { color:#176148; }
 
 /* ── practical dispatch workflow ───────────────────────────────────────── */
 .operations-board { margin:0 0 16px; padding:18px; background:#fff; border:1px solid #cfe3d7; border-radius:16px; box-shadow:0 8px 25px rgba(24, 78, 57, .07); }
