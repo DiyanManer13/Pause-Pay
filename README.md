@@ -99,14 +99,6 @@ The Mermaid diagram is included as the project architecture visual. The current 
 
 The checked-in backend has optional AWS integrations. They are enabled only with `HEATBUDGET_AWS_ENABLED=true`, valid server-side credentials, and the relevant resource identifiers:
 
-| AWS service | Project use | Status |
-|---|---|---|
-| **Amazon SNS** | Server-side rest nudges and emergency notifications | Implemented, optional |
-| **Amazon Bedrock Runtime** | Server-side plain-language compliance-report generation | Implemented, optional |
-| **AWS Secrets Manager** | Optional secret retrieval through the AWS SDK | Implemented, optional |
-| **Amazon Location Service** | Not used by the current live-map path | Not in current runtime |
-| **AWS Amplify** | Not configured as this repository's hosting path | Not in current runtime |
-
 AWS credentials must never be supplied to Vite or committed into the frontend. The Spring Boot service uses the AWS SDK default credential provider chain, so use an IAM role when deployed or a local AWS profile while developing.
 
 ### 3. Backend (Java / Spring Boot)
