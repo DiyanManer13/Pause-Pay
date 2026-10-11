@@ -1,12 +1,22 @@
 .env
+.env.*
+!.env.example
+!.env.*.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+!frontend/.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+*.jks
+secrets/
+credentials/
 target/
 .idea/
 *.iml
 
 frontend/dist/
-.env
-frontend/.env
-frontend/dist/
-.env
-frontend/.env
 node_modules/

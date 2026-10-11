@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-heatbudget}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me-locally}
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
@@ -20,7 +20,7 @@ services:
     image: redis:7-alpine
     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-change-me-locally}
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     volumes:
       - redis-data:/data
     healthcheck:
