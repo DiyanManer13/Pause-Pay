@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@zxing/browser": "0.1.5",
+    "@zxing/browser": "0.2.1",
     "leaflet": "1.9.4",
     "lucide-react": "1.54.0",
     "react": "19.3.0",
