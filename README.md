@@ -17,7 +17,7 @@
 - [Screenshots](#screenshots)
 - [Technical Architecture and Stack](#technical-architecture-and-stack)
 - [Setup and Run](#setup-and-run)
-)
+
 
 ---
 
