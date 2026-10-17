@@ -35,7 +35,7 @@ The result is a choice no worker should have to make: protect your health or pro
 
 ## Objective
 
-Make safety and earnings work together instead of against each other. HeatBudget treats heat as a budget:
+Make safety and earnings work together instead of against each other. Pause-Pay treats heat as a budget:
 
 1. **Track what actually builds up.** Estimate each rider's cumulative heat dose over the shift, not just the temperature at one moment.
 2. **Cut the heat that earns nothing.** Reduce unpaid time in the sun by guiding riders to shaded waiting spots.
@@ -50,16 +50,16 @@ Make safety and earnings work together instead of against each other. HeatBudget
 
 ## Solution Overview
 
-HeatBudget is a dispatch interceptor that monitors rider heat exposure. When a rider approaches a critical limit, the engine routes them to a recovery point and calculates a financial **Pause Pay** credit to offset income lost while resting.
+Pause-Pay is a dispatch interceptor that monitors rider heat exposure. When a rider approaches a critical limit, the engine routes them to a recovery point and calculates a financial **Pause Pay** credit to offset income lost while resting.
 
-A seeded simulator replays the same day twice, once with baseline nearest-rider dispatch and once with HeatBudget dispatch, so the difference comes from the algorithm alone.
+A seeded simulator replays the same day twice, once with baseline nearest-rider dispatch and once with Pause-Pay dispatch, so the difference comes from the algorithm alone.
 
 ## Key Features
 
 | Feature | What it does |
 |---|---|
 | **Rider View** | Mobile UI showing live heat dose, route shading, and nearby rest stops |
-| **Dispatch Comparison** | Dual simulation of baseline dispatch vs. HeatBudget algorithm-assisted dispatch |
+| **Dispatch Comparison** | Dual simulation of baseline dispatch vs. Pause-Pay algorithm-assisted dispatch |
 | **Pause Pay** | Calculates financial incentives based on time spent in a designated rest geofence |
 | **SOS Alerts** | Manual and automated emergency triggers that push alerts to Fleet Managers |
 | **Reports** | Dashboard generating aggregate KPI compliance reports |
@@ -69,7 +69,7 @@ A seeded simulator replays the same day twice, once with baseline nearest-rider 
 
 ### Dispatch comparison
 
-![Baseline vs HeatBudget dispatch comparison](assets/comparison.png)
+![Baseline vs Pause-Pay dispatch comparison](assets/comparison.png)
 
 ### Rider view
 
@@ -84,7 +84,7 @@ A seeded simulator replays the same day twice, once with baseline nearest-rider 
 
 ### Architecture diagram
 
-![HeatBudget Mermaid architecture diagram](assets/mermaid-diagram.svg)
+![Pause-Pay Mermaid architecture diagram](assets/mermaid-diagram.svg)
 
 The Mermaid diagram is included as the project architecture visual. The current live comparison path uses OpenStreetMap tiles, OSRM road routing, and Open-Meteo weather data.
 
@@ -97,7 +97,7 @@ The Mermaid diagram is included as the project architecture visual. The current 
 
 ### 2. Cloud Integrations (Amazon Web Services)
 
-The checked-in backend has optional AWS integrations. They are enabled only with `HEATBUDGET_AWS_ENABLED=true`, valid server-side credentials, and the relevant resource identifiers:
+The checked-in backend has optional AWS integrations. They are enabled only with `Pause-Pay_AWS_ENABLED=true`, valid server-side credentials, and the relevant resource identifiers:
 
 AWS credentials must never be supplied to Vite or committed into the frontend. The Spring Boot service uses the AWS SDK default credential provider chain, so use an IAM role when deployed or a local AWS profile while developing.
 
