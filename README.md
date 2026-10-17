@@ -1,4 +1,4 @@
-# HeatBudget
+# Pause-Pay
 
 ### Algorithm-driven heat protection and "Pause Pay" for delivery fleets
 
